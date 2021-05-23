@@ -1,5 +1,7 @@
 package com.airton.sales_project.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,7 +18,9 @@ public class Category implements Serializable {
     private String name;
 
 
-    @Transient // impede o JPA interpretar esse comando
+    //@Transient -> impede o JPA interpretar esse comando
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
 
     public Category(){
