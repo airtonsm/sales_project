@@ -1,6 +1,7 @@
 package com.airton.sales_project.entities;
 
 import com.airton.sales_project.entities.PK.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ import java.util.Objects;
 public class OrderItem implements Serializable {
 
     @EmbeddedId
-    private OrderItemPK id; //id composto
+    private OrderItemPK id = new OrderItemPK(); //id composto
 
     private Integer quantity;
     private Double price;
@@ -27,6 +28,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
     }
