@@ -24,4 +24,8 @@ public class UserService {
         return  obj.get(); //retorna objeto do tipo User que está contido no 'obj'
     }
 
+    public User insert(User obj){
+        return repository.save(obj);
+    }
+
 }
