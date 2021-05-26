@@ -39,6 +39,13 @@ public class UserResource {
         return ResponseEntity.created(uri).body(obj);
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){ // a reposta é void pois a requisição não retorna nenhum corpo(body0
+        service.delete(id);
+        return ResponseEntity.noContent().build(); //noContent retorna um resposta vazia e code 204
+
+    }
+
 
 
 }
