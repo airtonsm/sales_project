@@ -8,13 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
 
     @EmbeddedId
-    private OrderItemPK id = new OrderItemPK(); //id composto
+    private OrderItemPK id = new OrderItemPK(); //PK composto
 
     private Integer quantity;
     private Double price;
@@ -37,6 +38,7 @@ public class OrderItem implements Serializable {
         id.setOrder(order);
     }
 
+    //@JsonIgnore
     public Product getProduct(){
         return id.getProduct();
     }
@@ -60,6 +62,7 @@ public class OrderItem implements Serializable {
     public void setPrice(Double price) {
         this.price = price;
     }
+
 
     @Override
     public boolean equals(Object o) {
