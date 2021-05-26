@@ -16,7 +16,7 @@ public class UserService {
     private UserRepository repository;
 
     public List<User> findAll(){
-        return  repository.findAll();
+        return  repository.findAll(); // vai no banco e trás o usuárip
     }
 
     public User findById(Long id){
@@ -30,6 +30,19 @@ public class UserService {
 
     public void delete(Long id){
         repository.deleteById(id);
+    }
+
+    public User update(Long id, User obj){
+        User entity = repository.getOne(id); // instancia user, sem ir no banco, para ser monitorado e trabalhar com ele, para depois efetuar alguam ação
+        updateData(entity, obj);
+        return repository.save(entity);
+    }
+
+    private void updateData(User entity, User obj) {
+        entity.setName(obj.getName());
+        entity.setEmail(obj.getEmail());
+        entity.setPhone(obj.getPhone());
+
     }
 
 }
