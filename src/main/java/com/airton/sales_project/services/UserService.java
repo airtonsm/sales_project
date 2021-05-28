@@ -3,8 +3,11 @@ package com.airton.sales_project.services;
 
 import com.airton.sales_project.entities.User;
 import com.airton.sales_project.repositories.UserRepository;
+import com.airton.sales_project.services.exceptions.DataBaseException;
 import com.airton.sales_project.services.exceptions.ResourcesNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 
@@ -31,7 +34,14 @@ public class UserService {
     }
 
     public void delete(Long id){
-        repository.deleteById(id);
+
+        try{
+            repository.deleteById(id);
+        }catch (EmptyResultDataAccessException e){ // captura específca de excessão
+            throw new ResourcesNotFoundException(id); // importando excessão construida
+        }catch (DataIntegrityViolationException e){
+            throw new DataBaseException(e.getMessage());
+        }
     }
 
     public User update(Long id, User obj){
