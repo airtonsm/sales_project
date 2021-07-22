@@ -24,8 +24,8 @@ public class Product implements Serializable {
 
     //@Transient -> impede o JPA interpretar esse comando
     @ManyToMany
-    @JoinTable(name = "tb_product_category", // name table association
-            joinColumns = @JoinColumn(name = "product_id"), // name FK in the table Category
+    @JoinTable(name = "tb_product_category", // nome da tabela de associação
+            joinColumns = @JoinColumn(name = "product_id"), // nome fk
             inverseJoinColumns = @JoinColumn(name = "category_id"))   // inverserJoinColumns aponta o @joinColumn para referenciar FK na tabela Product
     private Set<Category> categories = new HashSet<>(); // "new HashSet" permite que a categoria não inicie nula, porém vazia.
 
